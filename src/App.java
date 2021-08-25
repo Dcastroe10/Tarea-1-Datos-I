@@ -2,13 +2,15 @@ import java.io.IOException;
 
 public class App {
     public static void main (String [] args){
-        Cliente cliente = new Cliente();
+        Cliente client = new Cliente();
+
         try{
-            cliente.conectar("192.168.0.107",8080);
-            String answer = cliente.enviarmensaje("HOLA DESDE EL CLIENTE");
-            System.out.println("servidor"+ answer);
-            cliente.endsession();
+            client.conectar ("127.0.0.1",8080);
+            String msg = client.enviarmensaje("Hello from client!");
+            System.out.println("Server: "+msg);
+            client.endsession();
         }
+
         catch (IOException e){
             e.printStackTrace();
         }

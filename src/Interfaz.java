@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Interfaz {
 
@@ -8,7 +9,8 @@ public class Interfaz {
         JFrame window = new JFrame();
         JButton botoncalcular = new JButton("Calcular");
         JTextField datos = new JTextField();
-        JTextArea calculos = new JTextArea("lol");
+        JTextArea calculos = new JTextArea();
+        Cliente cliente = new Cliente();
         calculos.setBounds(10,2,350,300);
         datos.setBounds(10, 420, 230, 35);
         botoncalcular.setBounds(250, 420, 80, 35);
@@ -24,8 +26,17 @@ public class Interfaz {
             public void actionPerformed(ActionEvent e) {
                 String prueba;
                 prueba = datos.getText();
+                try {
+                    cliente.conectar("127.0.0.1",12321);
+                    String msg = cliente.enviarmensaje(prueba);
+                    //System.out.println("Server: "+msg);
+                    calculos.setText(msg);
+                    //cliente.stopConnection();
+                }  catch (IOException a) {
+                    a.printStackTrace();
+                }
                 //System.out.println(prueba);
-                calculos.setText(prueba);
+                //calculos.setText(prueba);
 
             }
         });

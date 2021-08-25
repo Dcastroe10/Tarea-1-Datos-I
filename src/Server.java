@@ -12,6 +12,7 @@ public class Server {
     private BufferedReader input;
 
     public void recibirmensaje(int puerto) throws IOException{
+        System.out.println("esperando");
         servidor = new ServerSocket(puerto);
         clienteSocket = servidor.accept();
         out = new PrintWriter(clienteSocket.getOutputStream(), true);
@@ -20,7 +21,7 @@ public class Server {
         ////logicaaaa
 
         System.out.println("Cliente:"+answer);
-        out.print("Hola desde servidor");
+        out.println("Hola desde servidor");
     }
     public void finalizar() throws IOException{
         input.close();
@@ -30,12 +31,11 @@ public class Server {
     }
     public static void main(String[] args) {
         Server servidor = new Server();
-        try {
-            servidor.recibirmensaje(8080);
-        }
-        catch (IOException e){
-            e.printStackTrace();
+            try {
+                servidor.recibirmensaje(12321);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-    }
 }

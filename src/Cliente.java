@@ -17,8 +17,8 @@ public class Cliente {
     }
     public String enviarmensaje(String mensaje) throws IOException {
         out.println(mensaje);
-        String answer = input.readLine();
-        return answer;
+        //String answer = input.readLine();
+        return input.readLine();
     }
     public void endsession() throws IOException{
         input.close();
