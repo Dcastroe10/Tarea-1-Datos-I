@@ -13,14 +13,14 @@ public class Server {
 
     public void recibirmensaje(int puerto) throws IOException{
         servidor = new ServerSocket(puerto);
-        clienteSocket = new servidor.accept();
+        clienteSocket = servidor.accept();
         out = new PrintWriter(clienteSocket.getOutputStream(), true);
         input = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
         String answer = input.readLine();
         ////logicaaaa
 
         System.out.println("Cliente:"+answer);
-        out.print("mensaje recibido");
+        out.print("Hola desde servidor");
     }
     public void finalizar() throws IOException{
         input.close();
@@ -28,7 +28,7 @@ public class Server {
         clienteSocket.close();
         servidor.close();
     }
-    public void main(String[] args) {
+    public static void main(String[] args) {
         Server servidor = new Server();
         try {
             servidor.recibirmensaje(8080);
