@@ -11,17 +11,18 @@ public class Cliente {
 
 
     public void conectar(String IP, Integer port) throws IOException {
-        //iniciar_socket(IP,port);
         clienteSocket = new Socket(IP, port);
         out = new PrintWriter(clienteSocket.getOutputStream(), true);
         input = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
+        Comunication comunication = new Comunication(clienteSocket.getInputStream());
+        new Thread(comunication).start();
     }
+
 
     public String calcular_monto(String Valor,String Peso, String Impuesto) throws IOException {
         out.println(Valor);
-        //String answer = input.readLine();
-        //return input.readLine();
-        return Valor;
+        System.out.println(input.readLine());
+        return Valor; //String.valueOf(input.readLine());
     }
     ///public void endsession() throws IOException{
     // out.close();

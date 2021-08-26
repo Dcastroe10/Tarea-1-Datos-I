@@ -21,17 +21,11 @@ public class Nuevosclientes extends Thread {
         out = new PrintWriter(clienteSocket.getOutputStream(), true);
     }
 
-    private void enviar_clientes(String mensaje){
-        if (mensaje.equalsIgnoreCase("Finish")){
-            out.println("Finish");
-        }
-        else{
+    private void enviar_clientes(int monto){
             for (Nuevosclientes user : lista_clientes){
-                if (!user.equals(this))
-                    user.out.println(mensaje);
+                    user.out.println(monto);
             }
         }
-    }
 
     public void disconnect() throws IOException{
         input.close();
@@ -46,8 +40,8 @@ public class Nuevosclientes extends Thread {
                 String mensaje = input.readLine();
                 if (mensaje.equalsIgnoreCase("Finish")){break;}
                 System.out.println("ESTE SAPO: "+ mensaje);
-                out.println(mensaje);
-                enviar_clientes(mensaje);
+                //out.println(Integer.parseInt( mensaje) *2);
+                enviar_clientes(23);
         }
             disconnect();
         }

@@ -13,7 +13,7 @@ public class Server {
 
     public void iniciar(int puerto) throws IOException {
         servidor = new ServerSocket(puerto);
-        System.out.println("ESTAMOS EN EL PUERTOOOO");
+        System.out.println("PUERTOOOO");
 
         while (true){
             Socket clienteS = servidor.accept();
