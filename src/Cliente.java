@@ -9,21 +9,24 @@ public class Cliente {
     private PrintWriter out;
     private BufferedReader input;
 
+
     public void conectar(String IP, Integer port) throws IOException {
+        //iniciar_socket(IP,port);
         clienteSocket = new Socket(IP, port);
         out = new PrintWriter(clienteSocket.getOutputStream(), true);
         input = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
-        System.out.println("conectado!!!");
     }
-    public String enviarmensaje(String mensaje) throws IOException {
-        out.println(mensaje);
+
+    public String calcular_monto(String Valor,String Peso, String Impuesto) throws IOException {
+        out.println(Valor);
         //String answer = input.readLine();
-        return input.readLine();
+        //return input.readLine();
+        return Valor;
     }
-    public void endsession() throws IOException{
-        input.close();
-        out.close();
-        clienteSocket.close();
-        System.out.println("FINALIZÓOOO");
-    }
+    ///public void endsession() throws IOException{
+    // out.close();
+    //input.close();
+    //clienteSocket.close();
+    //System.out.println("FINALIZOOO");
+    //}
 }

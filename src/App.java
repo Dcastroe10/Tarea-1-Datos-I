@@ -6,9 +6,9 @@ public class App {
 
         try{
             client.conectar ("127.0.0.1",8080);
-            String msg = client.enviarmensaje("Hello from client!");
+            String msg = client.calcular_monto("Hello from client!","Peso","Impuesto");
             System.out.println("Server: "+msg);
-            client.endsession();
+            //client.endsession();
         }
 
         catch (IOException e){

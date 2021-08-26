@@ -1,38 +1,33 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server {
     private ServerSocket servidor;
-    private Socket clienteSocket;
-    private PrintWriter out;
-    private BufferedReader input;
+    private final ArrayList<Nuevosclientes> lista_clientes;
 
-    public void recibirmensaje(int puerto) throws IOException{
-        System.out.println("esperando");
+    public Server(){
+        lista_clientes = new ArrayList<Nuevosclientes>();
+    }
+
+    public void iniciar(int puerto) throws IOException {
         servidor = new ServerSocket(puerto);
-        clienteSocket = servidor.accept();
-        out = new PrintWriter(clienteSocket.getOutputStream(), true);
-        input = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
-        String answer = input.readLine();
-        ////logicaaaa
+        System.out.println("ESTAMOS EN EL PUERTOOOO");
 
-        System.out.println("Cliente:"+answer);
-        out.println("Hola desde servidor");
+        while (true){
+            Socket clienteS = servidor.accept();
+            Nuevosclientes nuevosclientes = new Nuevosclientes(clienteS, lista_clientes);
+            nuevosclientes.start();
+            System.out.println("SE CONECTO UN SAPO");
+        }
     }
-    public void finalizar() throws IOException{
-        input.close();
-        out.close();
-        clienteSocket.close();
-        servidor.close();
-    }
+
+
     public static void main(String[] args) {
         Server servidor = new Server();
             try {
-                servidor.recibirmensaje(12321);
+                servidor.iniciar(12321);
             } catch (IOException e) {
                 e.printStackTrace();
             }
