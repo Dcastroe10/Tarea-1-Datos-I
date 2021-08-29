@@ -41,12 +41,7 @@ public class Cliente implements Runnable{
         System.out.println(answer);
         return answer;
     }
-    public void endsession() throws IOException{
-        input.close();
-        out.close();
-        clienteSocket.close();
-        System.out.println("FINALIZÓOOO");
-    }
+   
 
     public void run(){  //Método run no se utiliza debido a que no se pudo crear el Thread correctamente
         try {
