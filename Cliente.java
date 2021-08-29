@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Cliente extends Thread{
+public class Cliente implements Runnable{
     private Socket clienteSocket;
     private PrintWriter out;
     private BufferedReader input;
@@ -17,25 +17,21 @@ public class Cliente extends Thread{
 
     }
 
-    public void recibir_mensaje() throws IOException{
-        while (true) {
-            String monto = input.readLine();
-            int resultado = calcular(monto);
-            out.println(resultado);
-        }
-    }
 
-    public static int calcular(String datos) {
+    public static float calcular(String datos) {
+        System.out.println("CALCULANDO MONTO");
         String Monto;
         String Peso;
         String Impuesto;
         String[] Montos;
+        double result;
         Montos= datos.split("-");
         Monto=Montos[0];
         Peso = Montos[1];
         Impuesto = Montos[2];
+        result = (Float.parseFloat(Monto)*(Float.parseFloat(Impuesto)/100))+(Float.parseFloat(Peso)*0.15);
+        return (float) result;
 
-        return Integer.parseInt(Monto)*Integer.parseInt(Peso)*Integer.parseInt(Impuesto);
 
     }
 
@@ -51,4 +47,18 @@ public class Cliente extends Thread{
         clienteSocket.close();
         System.out.println("FINALIZÓOOO");
     }
-}
+
+    public void run(){  //Método run no se utiliza debido a que no se pudo crear el Thread correctamente
+        try {
+            while (true){
+                System.out.println("esperando mensaje");
+                String monto = input.readLine();
+                System.out.println(monto);
+                float resultado = calcular(monto);
+                out.println(resultado);
+            }
+        }catch (IOException w){
+            w.printStackTrace();
+        }
+    }
+    }
