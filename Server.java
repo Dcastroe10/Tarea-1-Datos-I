@@ -8,13 +8,23 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Crea el servidor por medio de sockets y a su vez recibe información para calcular el
+ * monto y enviarlo al cliente
+ * @author Daniel Castro
+ */
 public class Server extends Thread{
     private ServerSocket servidor;
     private Socket clienteSocket;
     private PrintWriter out;
     private BufferedReader input;
 
-
+    /**
+     * Se prepara para recibir un mensaje, luego llama a un método para calcular el monto final del producto
+     * y luego envía el monto final hacia el cliente
+     * @param puerto
+     * @throws IOException
+     */
     public void recibirmensaje(int puerto) throws IOException {
         System.out.println("RECIBIR MENSAJE");
         servidor = new ServerSocket(puerto);
@@ -30,14 +40,25 @@ public class Server extends Thread{
         }
     }
 
+    /**
+     * Envía el código con los valores ingresados por el usuario hacia el otro cliente
+     * @param Code
+     * @return el monto calculado por el otro cliente
+     * @throws IOException
+     */
     public String calcular_monto(String Code) throws IOException{
         out.println(Code);
         String Monto = input.readLine();
         System.out.println(Monto);
         return Monto;
-
     }
 
+    /**
+     * Recibe un código con los datos para luego decodificarlo y calcular el precio final del producto ingresado
+     *
+     * @param datos
+     * @return el precio ya calculado
+     */
     public static float calcular(String datos) {
         String Monto;
         String Peso;
@@ -52,6 +73,12 @@ public class Server extends Thread{
         return (float) result;
 
     }
+
+    /**
+     * Crea la interfaz gráfica para interactuar con el usuario
+     * @param args
+     * @throws IOException
+     */
 
     public static void main(String[] args) throws IOException{
         Server servidor = new Server();

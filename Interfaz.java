@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**Crea la interfaz gráfica para la utilización de la clase Cliente
+ * @author Daniel Castro
+ */
+
 public class Interfaz extends Thread {
 
     public static void main(String[] args) throws  IOException{
